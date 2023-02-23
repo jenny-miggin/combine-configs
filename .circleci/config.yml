@@ -5,25 +5,15 @@ setup: true
 orbs:
   config-splitting: circle-makotom-orbs/config-splitting@0.0.9
 
-jobs:
-  shared-job:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - run: echo "A job from the main config!"
-
 workflows:
   setup-config-files:
     jobs:
       # Specify the file listing configs to be combined in `config-list-file`
       # This job combines those listed configs, then execute the resulting config.
-      - shared-job
       - config-splitting/run-modular-configs-selectively:
           module-list-file: .circleci/subdir-list.txt
           base-revision: main # Compare against this branch
           force-all: true
-          requires:
-            - shared-job
 
 
 # VS Code Extension Version: 1.1.1

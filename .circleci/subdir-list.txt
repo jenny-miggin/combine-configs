@@ -1,2 +1,2 @@
-subdir-a
 subdir-b
+subdir-a

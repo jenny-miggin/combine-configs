@@ -1,0 +1,15 @@
+version: 2.1
+
+# Resources defined in this config have a prefix `B-` to avoid conflicts upon combine/merge
+
+jobs:
+  B-test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Running tests for subdirectory B"
+
+workflows:
+  B-main-workflow:
+    jobs:
+      - B-test

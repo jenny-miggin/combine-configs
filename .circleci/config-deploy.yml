@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  prod-deployment:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - run: echo "I'm going to run some deployments!"
+      - run: echo "This is my prod on main branch deployment!"
+      - run: echo "prod-deployment job envoked"
+  
+  preprod-deployment:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "some preprod deployments - success!"
+      - run: echo "This is my dev deployment!"
+
+
+workflows:
+  deployment-workflows:
+    jobs:
+    - prod-deployment:
+        filters:
+          branches:
+            only: 
+              - main
+    - preprod-deployment:
+        filters:
+          branches:
+            ignore:
+              - main
